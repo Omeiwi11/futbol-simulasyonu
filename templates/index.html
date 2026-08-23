@@ -11,15 +11,35 @@
     <style>
 
         body {
-            background-color: #121212;
-            color: white;
-        }
+        background-color: #121212;
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+
+    body.acik-tema {
+        background-color: white;
+        color: black;
+    }
+
+    .tema-butonu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
 
     </style>
 
 </head>
 
 <body>
+
+     <button class="tema-butonu" onclick="temaDegistir()">
+        🌙 Koyu / ☀️ Açık
+    </button>
 
     <h1>⚽ FUTBOL SİMÜLASYONU</h1>
 
@@ -62,6 +82,10 @@
         <h3>{{ sonuc }}</h3>
 
     {% endif %}
+
+     <button class="tema-butonu" onclick="temaDegistir()">
+        🌙 Koyu / ☀️ Açık
+    </button>
 
 </body>
 
