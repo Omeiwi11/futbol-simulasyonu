@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Futbol Simülasyonu</title>
+
+</head>
+
+<body>
+
+    <h1>⚽ FUTBOL SİMÜLASYONU</h1>
+
+    <form method="POST">
+
+        <p>Ev Sahibi Takım</p>
+
+        <select name="takim1">
+
+            {% for takim in takimlar %}
+                <option value="{{ takim }}">{{ takim }}</option>
+            {% endfor %}
+
+        </select>
+
+
+        <p>Deplasman Takımı</p>
+
+        <select name="takim2">
+
+            {% for takim in takimlar %}
+                <option value="{{ takim }}">{{ takim }}</option>
+            {% endfor %}
+
+        </select>
+
+        <br><br>
+
+        <button type="submit">
+            MAÇI SİMÜLE ET
+        </button>
+
+    </form>
+
+
+    {% if sonuc %}
+
+        <h2>MAÇ SONUCU</h2>
+
+        <h3>{{ sonuc }}</h3>
+
+    {% endif %}
+
+</body>
+
+</html>
