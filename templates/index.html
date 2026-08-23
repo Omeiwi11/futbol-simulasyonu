@@ -7,41 +7,43 @@
 
     <title>Futbol Simülasyonu</title>
 
-
     <style>
 
         body {
-        background-color: #121212;
-        color: white;
-        font-family: Arial, sans-serif;
-    }
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
 
-    body.acik-tema {
-        background-color: white;
-        color: black;
-    }
+        body.acik-tema {
+            background-color: white;
+            color: black;
+        }
 
-    .tema-butonu {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-    }
+        .tema-butonu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
 
     </style>
 
 </head>
 
+
 <body>
 
-     <button class="tema-butonu" onclick="temaDegistir()">
+    <button class="tema-butonu" onclick="temaDegistir()">
         🌙 Koyu / ☀️ Açık
     </button>
 
+
     <h1>⚽ FUTBOL SİMÜLASYONU</h1>
+
 
     <form method="POST">
 
@@ -66,7 +68,9 @@
 
         </select>
 
+
         <br><br>
+
 
         <button type="submit">
             MAÇI SİMÜLE ET
@@ -83,9 +87,17 @@
 
     {% endif %}
 
-     <button class="tema-butonu" onclick="temaDegistir()">
-        🌙 Koyu / ☀️ Açık
-    </button>
+
+    <script>
+
+        function temaDegistir() {
+
+            document.body.classList.toggle("acik-tema");
+
+        }
+
+    </script>
+
 
 </body>
 
