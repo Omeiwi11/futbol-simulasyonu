@@ -53,54 +53,22 @@
     <button class="tema-butonu" onclick="temaDegistir()">
         🌙 Koyu / ☀️ Açık
     </button>
-
-    <div class="fikstur-butonu">
-    <a href="/fikstur">
-        <button>📅 FİKSTÜR</button>
-
-    </a>
+    
     </div>
 
     <a href="/mac">
     <button>⚽ MAÇI SİMÜLE ET</button>
 </a>
-
+  
     </a>
     <h1>⚽ FUTBOL SİMÜLASYONU</h1>
 
 
-    <form method="POST">
-
-        <p>Ev Sahibi Takım</p>
-
-        <select name="takim1">
-
-            {% for takim in takimlar %}
-                <option value="{{ takim }}">{{ takim }}</option>
-            {% endfor %}
-
-        </select>
-
-
-        <p>Deplasman Takımı</p>
-
-        <select name="takim2">
-
-            {% for takim in takimlar %}
-                <option value="{{ takim }}">{{ takim }}</option>
-            {% endfor %}
-
-        </select>
-
-
-        <br><br>
-
-
-        <button type="submit">
-            MAÇI SİMÜLE ET
-        </button>
-
-    </form>
+<div class="menu-butonu">
+    <a href="/mac">
+        <button>⚽ MAÇI SİMÜLE ET</button>
+    </a>
+</div>
 
 
     {% if sonuc %}
