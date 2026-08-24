@@ -64,9 +64,41 @@ def ana_sayfa():
 def fikstur():
     return render_template("fikstur.html")
 
-@app.route("/mac")
+@app.route("/mac", methods=["GET", "POST"])
 def mac():
-    return render_template("mac.html")
+
+    sonuc = ""
+
+    if request.method == "POST":
+
+        takim1 = request.form["takim1"]
+        takim2 = request.form["takim2"]
+
+        if takim1 == takim2:
+
+            sonuc = "Aynı takım kendisiyle oynayamaz!"
+
+        else:
+
+            gol1 = random.randint(0, 5)
+            gol2 = random.randint(0, 5)
+
+            if gol1 > gol2:
+                kazanan = takim1 + " kazandı!"
+
+            elif gol2 > gol1:
+                kazanan = takim2 + " kazandı!"
+
+            else:
+                kazanan = "Berabere!"
+
+            sonuc = f"{takim1} {gol1} - {gol2} {takim2} | {kazanan}"
+
+    return render_template(
+        "mac.html",
+        takimlar=takimlar,
+        sonuc=sonuc
+    )
 
 
 if __name__ == "__main__":
