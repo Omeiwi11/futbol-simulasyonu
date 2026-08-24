@@ -64,6 +64,10 @@ def ana_sayfa():
 def fikstur():
     return render_template("fikstur.html")
 
+@app.route("/mac")
+def mac():
+    return render_template("mac.html")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
