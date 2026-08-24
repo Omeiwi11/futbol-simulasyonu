@@ -9,23 +9,11 @@
 
     <style>
 
-        .fikstur-butonu {
-    text-align: center;
-    margin-top: 40px;
-}
-
-.fikstur-butonu button {
-    font-size: 24px;
-    padding: 15px 40px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-}
-
         body {
             background-color: #121212;
             color: white;
             font-family: Arial, sans-serif;
+            text-align: center;
         }
 
         body.acik-tema {
@@ -43,6 +31,30 @@
             cursor: pointer;
         }
 
+        .menu-butonu {
+            margin-top: 50px;
+        }
+
+        .menu-butonu button {
+            font-size: 24px;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .fikstur-butonu {
+            margin-top: 20px;
+        }
+
+        .fikstur-butonu button {
+            font-size: 24px;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
     </style>
 
 </head>
@@ -53,31 +65,27 @@
     <button class="tema-butonu" onclick="temaDegistir()">
         🌙 Koyu / ☀️ Açık
     </button>
-    
-    </div>
 
-    <a href="/mac">
-    <button>⚽ MAÇI SİMÜLE ET</button>
-</a>
-  
-    </a>
+
     <h1>⚽ FUTBOL SİMÜLASYONU</h1>
 
 
-<div class="menu-butonu">
-    <a href="/mac">
-        <button>⚽ MAÇI SİMÜLE ET</button>
-    </a>
-</div>
+    <div class="menu-butonu">
+
+        <a href="/mac">
+            <button>⚽ MAÇI SİMÜLE ET</button>
+        </a>
+
+    </div>
 
 
-    {% if sonuc %}
+    <div class="fikstur-butonu">
 
-        <h2>MAÇ SONUCU</h2>
+        <a href="/fikstur">
+            <button>📅 FİKSTÜR</button>
+        </a>
 
-        <h3>{{ sonuc }}</h3>
-
-    {% endif %}
+    </div>
 
 
     <script>
