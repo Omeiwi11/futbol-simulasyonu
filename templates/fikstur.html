@@ -1,27 +1,233 @@
+```html
 <!DOCTYPE html>
 <html lang="tr">
 
 <head>
+
     <meta charset="UTF-8">
-    <title>Fikstür</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>TFF Fikstürü</title>
+
 
     <style>
 
-    body {
-        background-color: #121212;
-        color: white;
-        font-family: Arial, sans-serif;
-    }
+        body {
 
-</style>
+            font-family: Arial, sans-serif;
+
+            background-color: #f2f2f2;
+
+            margin: 0;
+
+            padding: 30px;
+
+        }
+
+
+        h1 {
+
+            text-align: center;
+
+            margin-bottom: 40px;
+
+        }
+
+
+        .hafta {
+
+            background-color: white;
+
+            width: 700px;
+
+            max-width: 95%;
+
+            margin: 0 auto 30px auto;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 2px 8px
+                rgba(0, 0, 0, 0.1);
+
+        }
+
+
+        .hafta-baslik {
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+
+            padding-bottom: 10px;
+
+            border-bottom: 2px solid #ddd;
+
+        }
+
+
+        .mac {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 14px 5px;
+
+            border-bottom: 1px solid #ddd;
+
+            font-size: 17px;
+
+        }
+
+
+        .mac:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .takim {
+
+            width: 40%;
+
+        }
+
+
+        .ev {
+
+            text-align: right;
+
+        }
+
+
+        .deplasman {
+
+            text-align: left;
+
+        }
+
+
+        .skor {
+
+            width: 80px;
+
+            text-align: center;
+
+            font-weight: bold;
+
+            font-size: 18px;
+
+        }
+
+
+        .oynanmadi {
+
+            color: #888;
+
+            font-weight: normal;
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-    <h1>📅 FİKSTÜR</h1>
 
-    <p>Yakında</p>
+    <h1>
+        TFF FİKSTÜRÜ
+    </h1>
+
+
+    {% for hafta in range(1, 35) %}
+
+
+        <div class="hafta">
+
+
+            <div class="hafta-baslik">
+
+                {{ hafta }}. Hafta
+
+            </div>
+
+
+            {% for mac in fiksturlar %}
+
+
+                {% if mac["hafta"] == hafta %}
+
+
+                    <div class="mac">
+
+
+                        <div class="takim ev">
+
+                            {{ mac["ev_sahibi"] }}
+
+                        </div>
+
+
+                        <div class="skor">
+
+
+                            {% if mac["skor"] %}
+
+                                {{ mac["skor"] }}
+
+                            {% else %}
+
+                                <span
+                                    class="oynanmadi"
+                                >
+                                    -
+                                </span>
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                        <div
+                            class="takim deplasman"
+                        >
+
+                            {{ mac["deplasman"] }}
+
+                        </div>
+
+
+                    </div>
+
+
+                {% endif %}
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+    {% endfor %}
+
 
 </body>
 
 </html>
+```
