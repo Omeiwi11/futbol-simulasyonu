@@ -8,9 +8,9 @@ import re
 app = Flask(__name__)
 
 
-# ==========================================
+
 # TAKIMLAR
-# ==========================================
+
 
 takimlar = [
     "Amedspor",
@@ -34,9 +34,9 @@ takimlar = [
 ]
 
 
-# ==========================================
+
 # 2026-2027 İLK DEVRE
-# ==========================================
+
 
 ilk_devre = [
 
@@ -263,9 +263,9 @@ ilk_devre = [
 ]
 
 
-# ==========================================
+
 # 306 MAÇI OLUŞTUR
-# ==========================================
+
 
 fiksturlar = []
 
@@ -300,9 +300,9 @@ for hafta, maclar in enumerate(
         })
 
 
-# ==========================================
+
 # TFF TAKIM İSİMLERİ
-# ==========================================
+
 
 TFF_TAKIM_ESLESMELERI = {
 
@@ -358,9 +358,9 @@ TFF_TAKIM_ESLESMELERI = {
 }
 
 
-# ==========================================
+
 # TFF TAKIM ADINI DÜZELT
-# ==========================================
+
 
 def takim_adi_duzelt(takim):
 
@@ -373,9 +373,8 @@ def takim_adi_duzelt(takim):
     return None
 
 
-# ==========================================
-# TFF'DEN FİKSTÜRÜ ÇEK
-# ==========================================
+
+
 
 def tff_skorlarini_getir():
 
@@ -403,9 +402,9 @@ def tff_skorlarini_getir():
             "html.parser"
         )
 
-        # ======================================
+
         # SADECE FİKSTÜR LİSTESİNİ BUL
-        # ======================================
+
 
         metin = soup.get_text(
             " ",
@@ -419,9 +418,9 @@ def tff_skorlarini_getir():
             metin
         )
 
-        # ======================================
+
         # 1.Hafta / 2.Hafta / ...
-        # ======================================
+
 
         hafta_eslesmeleri = list(
             re.finditer(
@@ -433,9 +432,9 @@ def tff_skorlarini_getir():
 
         bulunan = []
 
-        # ======================================
+
         # HER HAFTAYI AYRI AYRI İNCELE
-        # ======================================
+
 
         for i, hafta_eslesme in enumerate(
             hafta_eslesmeleri
@@ -471,9 +470,9 @@ def tff_skorlarini_getir():
                 baslangic:bitis
             ]
 
-            # ==================================
+
             # TAKIM İSİMLERİNİ REGEX'E HAZIRLA
-            # ==================================
+
 
             tff_isimleri = sorted(
                 TFF_TAKIM_ESLESMELERI.keys(),
@@ -486,13 +485,12 @@ def tff_skorlarini_getir():
                 for x in tff_isimleri
             )
 
-            # ==================================
+
             # MAÇ SATIRI
             #
             # Takım - skor - takım
             # veya
             # Takım skor - skor takım
-            # ==================================
 
             desen = re.compile(
                 r"("
@@ -530,9 +528,9 @@ def tff_skorlarini_getir():
                 if not takim1 or not takim2:
                     continue
 
-                # ==================================
+
                 # SKOR
-                # ==================================
+
 
                 if (
                     gol1 is not None
@@ -563,9 +561,9 @@ def tff_skorlarini_getir():
 
                 })
 
-        # ======================================
+    
         # TEKRARLARI TEMİZLE
-        # ======================================
+    
 
         benzersiz = {}
 
@@ -604,9 +602,9 @@ def tff_skorlarini_getir():
             benzersiz.values()
         )
 
-        # ======================================
+
         # KONTROL
-        # ======================================
+
 
         print()
         print(
@@ -654,9 +652,9 @@ def tff_skorlarini_getir():
         return []
 
 
-# ==========================================
+
 # 306 FİKSTÜRÜN SKORLARINI GÜNCELLE
-# ==========================================
+
 
 def skorları_guncelle():
 
@@ -671,9 +669,9 @@ def skorları_guncelle():
 
         mac["skor"] = None
 
-    # ======================================
+
     # HAFTA + TAKIMLARLA EŞLEŞTİR
-    # ======================================
+
 
     for mac in fiksturlar:
 
@@ -739,9 +737,9 @@ def skorları_guncelle():
     )
 
 
-# ==========================================
+
 # ANA SAYFA
-# ==========================================
+
 
 @app.route("/")
 def ana_sayfa():
@@ -752,16 +750,13 @@ def ana_sayfa():
     )
 
 
-# ==========================================
+
 # FİKSTÜR
-# ==========================================
 
 @app.route("/fikstur")
 def fikstur():
 
-    # Her sayfa açılışında
-    # TFF'den tekrar güncel skorları çekiyoruz.
-
+    # TFF'den güncel skorları çek
     skorları_guncelle()
 
     return render_template(
@@ -770,9 +765,141 @@ def fikstur():
     )
 
 
-# ==========================================
+# PUAN DURUMU
+
+@app.route("/puan-durumu")
+def puan_durumu():
+    # TFF'den güncel skorları çek
+    skorları_guncelle()
+
+    puanlar = {}
+
+    # Önce normal takım listesini oluştur
+    for takim in takimlar:
+        puanlar[takim] = {
+            "oynanan": 0,
+            "galibiyet": 0,
+            "beraberlik": 0,
+            "maglubiyet": 0,
+            "attigi": 0,
+            "yedigi": 0,
+            "averaj": 0,
+            "puan": 0
+        }
+
+    # Fikstürde olup takım listesinde olmayan takım varsa
+    # otomatik olarak ekle
+    for mac in fiksturlar:
+        ev = mac["ev_sahibi"]
+        deplasman = mac["deplasman"]
+
+        if ev not in puanlar:
+            puanlar[ev] = {
+                "oynanan": 0,
+                "galibiyet": 0,
+                "beraberlik": 0,
+                "maglubiyet": 0,
+                "attigi": 0,
+                "yedigi": 0,
+                "averaj": 0,
+                "puan": 0
+            }
+
+        if deplasman not in puanlar:
+            puanlar[deplasman] = {
+                "oynanan": 0,
+                "galibiyet": 0,
+                "beraberlik": 0,
+                "maglubiyet": 0,
+                "attigi": 0,
+                "yedigi": 0,
+                "averaj": 0,
+                "puan": 0
+            }
+
+    # OYNANMIŞ MAÇLARI HESAPLA
+
+    for mac in fiksturlar:
+
+        if mac.get("skor") is None:
+            continue
+
+        skor = mac["skor"]
+
+        try:
+            gol1, gol2 = skor.split("-")
+            gol1 = int(gol1.strip())
+            gol2 = int(gol2.strip())
+        except:
+            continue
+
+        ev = mac["ev_sahibi"]
+        deplasman = mac["deplasman"]
+
+        # Oynanan maç sayısı
+        puanlar[ev]["oynanan"] += 1
+        puanlar[deplasman]["oynanan"] += 1
+
+        # Atılan goller
+        puanlar[ev]["attigi"] += gol1
+        puanlar[deplasman]["attigi"] += gol2
+
+        # Yenilen goller
+        puanlar[ev]["yedigi"] += gol2
+        puanlar[deplasman]["yedigi"] += gol1
+
+        # EV SAHİBİ KAZANDI
+        if gol1 > gol2:
+
+            puanlar[ev]["galibiyet"] += 1
+            puanlar[ev]["puan"] += 3
+            puanlar[deplasman]["maglubiyet"] += 1
+
+        # DEPLASMAN KAZANDI
+        elif gol2 > gol1:
+
+            puanlar[deplasman]["galibiyet"] += 1
+            puanlar[deplasman]["puan"] += 3
+            puanlar[ev]["maglubiyet"] += 1
+
+        # BERABERE
+        else:
+
+            puanlar[ev]["beraberlik"] += 1
+            puanlar[deplasman]["beraberlik"] += 1
+            puanlar[ev]["puan"] += 1
+            puanlar[deplasman]["puan"] += 1
+
+    # AVERAJ HESAPLA
+
+    for takim in puanlar:
+        puanlar[takim]["averaj"] = (
+            puanlar[takim]["attigi"]
+            -
+            puanlar[takim]["yedigi"]
+        )
+
+    # SIRALAMA
+
+    siralama = sorted(
+        puanlar.keys(),
+        key=lambda takim: (
+            puanlar[takim]["puan"],
+            puanlar[takim]["averaj"],
+            puanlar[takim]["attigi"]
+        ),
+        reverse=True
+    )
+
+    return render_template(
+        "puan_durumu.html",
+        siralama=siralama,
+        puanlar=puanlar
+    )
+
+
 # MAÇ SİMÜLASYONU
-# ==========================================
+
 
 @app.route(
     "/mac",
@@ -839,9 +966,9 @@ def mac():
     )
 
 
-# ==========================================
+
 # BAŞLAT
-# ==========================================
+
 
 if __name__ == "__main__":
 

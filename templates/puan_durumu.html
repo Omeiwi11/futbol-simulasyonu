@@ -1,0 +1,174 @@
+```html
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Puan Durumu - Süper Ligin Kalbi</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .tablo {
+            max-width: 1000px;
+            margin: auto;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background-color: #333;
+            padding: 14px 8px;
+        }
+
+        td {
+            padding: 12px 8px;
+            text-align: center;
+            border-bottom: 1px solid #444;
+        }
+
+        td.takim {
+            text-align: left;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #292929;
+        }
+
+        .puan {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .geri {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0 auto;
+            padding: 12px 25px;
+            background-color: white;
+            color: black;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <h1>🏆 PUAN DURUMU</h1>
+
+
+    <div class="tablo">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Sıra</th>
+                    <th>Takım</th>
+                    <th>O</th>
+                    <th>G</th>
+                    <th>B</th>
+                    <th>M</th>
+                    <th>AG</th>
+                    <th>YG</th>
+                    <th>AV</th>
+                    <th>P</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for takim in siralama %}
+
+                    <tr>
+
+                        <td>
+                            {{ loop.index }}
+                        </td>
+
+                        <td class="takim">
+                            {{ takim }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["oynanan"] }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["galibiyet"] }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["beraberlik"] }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["maglubiyet"] }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["attigi"] }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["yedigi"] }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["averaj"] }}
+                        </td>
+
+                        <td class="puan">
+                            {{ puanlar[takim]["puan"] }}
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <a href="/" class="geri">
+        🏠 ANA SAYFA
+    </a>
+
+
+</body>
+
+</html>
+```
