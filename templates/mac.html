@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Puan Durumu - Süper Ligin Kalbi</title>
+    <title>Maç Simülasyonu</title>
 
     <link
         rel="stylesheet"
@@ -20,88 +20,117 @@
     <style>
 
         body {
+
             min-height: 100vh;
+
             box-sizing: border-box;
+
             color: white;
+
         }
 
-        h1 {
+
+        .tema-butonu {
+
+            position: absolute;
+
+            top: 20px;
+
+            right: 20px;
+
+            padding: 10px 15px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            z-index: 10;
+
+        }
+
+
+        .mac-alani {
+
+            min-height: 90vh;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
             text-align: center;
+
+        }
+
+
+        .mac-alani h1 {
+
             margin-bottom: 30px;
-            color: white;
-        }
-
-        .tablo {
-
-            max-width: 1000px;
-
-            margin: 0 auto;
-
-            overflow-x: auto;
-
-        }
-
-        table {
-
-            width: 100%;
-
-            border-collapse: collapse;
-
-            background-color: #1e1e1e;
-
-            border-radius: 10px;
-
-            overflow: hidden;
-
-        }
-
-        th {
-
-            background-color: #333;
 
             color: white;
 
-            padding: 14px 8px;
+            font-size: 36px;
 
         }
 
-        td {
 
-            padding: 12px 8px;
-
-            text-align: center;
-
-            border-bottom: 1px solid #444;
+        .mac-alani p {
 
             color: white;
-
-        }
-
-        td.takim {
-
-            text-align: left;
-
-            font-weight: bold;
-
-            color: white;
-
-        }
-
-        tr:hover {
-
-            background-color: #292929;
-
-        }
-
-        .puan {
 
             font-weight: bold;
 
             font-size: 18px;
 
+        }
+
+
+        select {
+
+            padding: 12px;
+
+            font-size: 16px;
+
+            margin: 10px;
+
+            border-radius: 8px;
+
+            min-width: 220px;
+
+        }
+
+
+        .simule-butonu {
+
+            margin-top: 20px;
+
+            padding: 15px 30px;
+
+            font-size: 20px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            color: black;
+
+        }
+
+
+        .mac-alani h2,
+        .mac-alani h3 {
+
             color: white;
 
         }
+
 
         .geri {
 
@@ -109,7 +138,7 @@
 
             width: fit-content;
 
-            margin: 30px auto 0 auto;
+            margin: -40px auto 20px auto;
 
             padding: 12px 25px;
 
@@ -125,6 +154,7 @@
 
         }
 
+
         .geri:hover {
 
             background-color: #ddd;
@@ -132,17 +162,44 @@
         }
 
 
-        /* AÇIK TEMA */
-
         body.acik-tema {
 
             color: black;
 
         }
 
-        body.acik-tema h1 {
+
+        body.acik-tema .mac-alani h1,
+        body.acik-tema .mac-alani p,
+        body.acik-tema .mac-alani h2,
+        body.acik-tema .mac-alani h3 {
 
             color: black;
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .mac-alani h1 {
+
+                font-size: 28px;
+
+            }
+
+            select {
+
+                min-width: 200px;
+
+            }
+
+            .simule-butonu {
+
+                font-size: 18px;
+
+                padding: 13px 25px;
+
+            }
 
         }
 
@@ -154,104 +211,125 @@
 <body>
 
 
-    <h1>
-        🏆 PUAN DURUMU
-    </h1>
+    <button
+        class="tema-butonu"
+        onclick="temaDegistir()"
+    >
+
+        🌙 Koyu / ☀️ Açık
+
+    </button>
 
 
-    <div class="tablo">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Sıra</th>
-
-                    <th>Takım</th>
-
-                    <th>O</th>
-
-                    <th>G</th>
-
-                    <th>B</th>
-
-                    <th>M</th>
-
-                    <th>AG</th>
-
-                    <th>YG</th>
-
-                    <th>AV</th>
-
-                    <th>P</th>
-
-                </tr>
-
-            </thead>
+    <div class="mac-alani">
 
 
-            <tbody>
+        <h1>
 
-                {% for takim in siralama %}
+            ⚽ MAÇ SİMÜLASYONU
 
-                    <tr>
+        </h1>
 
-                        <td>
-                            {{ loop.index }}
-                        </td>
 
-                        <td class="takim">
-                            {{ takim }}
-                        </td>
+        <form method="POST">
 
-                        <td>
-                            {{ puanlar[takim]["oynanan"] }}
-                        </td>
 
-                        <td>
-                            {{ puanlar[takim]["galibiyet"] }}
-                        </td>
+            <p>
 
-                        <td>
-                            {{ puanlar[takim]["beraberlik"] }}
-                        </td>
+                Ev Sahibi Takım
 
-                        <td>
-                            {{ puanlar[takim]["maglubiyet"] }}
-                        </td>
+            </p>
 
-                        <td>
-                            {{ puanlar[takim]["attigi"] }}
-                        </td>
 
-                        <td>
-                            {{ puanlar[takim]["yedigi"] }}
-                        </td>
+            <select name="takim1">
 
-                        <td>
-                            {{ puanlar[takim]["averaj"] }}
-                        </td>
+                {% for takim in takimlar %}
 
-                        <td class="puan">
-                            {{ puanlar[takim]["puan"] }}
-                        </td>
+                    <option value="{{ takim }}">
 
-                    </tr>
+                        {{ takim }}
+
+                    </option>
 
                 {% endfor %}
 
-            </tbody>
+            </select>
 
-        </table>
+
+            <p>
+
+                Deplasman Takımı
+
+            </p>
+
+
+            <select name="takim2">
+
+                {% for takim in takimlar %}
+
+                    <option value="{{ takim }}">
+
+                        {{ takim }}
+
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <br>
+
+
+            <button
+                class="simule-butonu"
+                type="submit"
+            >
+
+                ⚽ MAÇI SİMÜLE ET
+
+            </button>
+
+
+        </form>
+
+
+        {% if sonuc %}
+
+            <h2>
+
+                MAÇ SONUCU
+
+            </h2>
+
+            <h3>
+
+                {{ sonuc }}
+
+            </h3>
+
+        {% endif %}
+
 
     </div>
 
 
     <a href="/" class="geri">
+
         🏠 ANA SAYFA
+
     </a>
+
+
+    <script>
+
+        function temaDegistir() {
+
+            document.body.classList.toggle("acik-tema");
+
+        }
+
+    </script>
 
 
 </body>

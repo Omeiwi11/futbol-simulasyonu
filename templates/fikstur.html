@@ -12,118 +12,255 @@
 
     <title>SüperLigin Kalbi - Fikstür</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
     <style>
 
+        body {
+
+            min-height: 100vh;
+
+            box-sizing: border-box;
+
+            color: white;
+
+        }
 
 
         h1 {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+        text-align: center;
+        margin-bottom: 40px;
+        color: white !important;
+        text-shadow: 2px 2px 5px black;
+       }
+
 
         .hafta {
-            background-color: white;
+
+            background-color: rgba(20, 20, 20, 0.92);
+
+            color: white;
+
             width: 700px;
+
             max-width: 95%;
+
             margin: 0 auto 30px auto;
+
             padding: 20px;
+
             border-radius: 10px;
+
             box-shadow:
                 0 2px 8px
-                rgba(0, 0, 0, 0.1);
+                rgba(0, 0, 0, 0.4);
+
         }
+
 
         .hafta-baslik {
+
             font-size: 24px;
+
             font-weight: bold;
+
             margin-bottom: 15px;
+
             padding-bottom: 10px;
-            border-bottom: 2px solid #ddd;
+
+            border-bottom: 2px solid #555;
+
+            color: white;
+
         }
+
 
         .mac {
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
+
             padding: 14px 5px;
-            border-bottom: 1px solid #ddd;
+
+            border-bottom: 1px solid #444;
+
             font-size: 17px;
+
+            color: white;
+
         }
+
 
         .mac:last-child {
+
             border-bottom: none;
+
         }
+
 
         .takim {
+
             width: 40%;
+
+            color: white;
+
+            font-weight: bold;
+
         }
+
 
         .ev {
+
             text-align: right;
+
         }
+
 
         .deplasman {
+
             text-align: left;
+
         }
+
 
         .skor {
+
             width: 80px;
+
             text-align: center;
+
             font-weight: bold;
+
             font-size: 18px;
+
+            color: white;
+
         }
+
 
         .oynanmadi {
-            color: #888;
+
+            color: #aaa;
+
             font-weight: normal;
+
         }
+
 
         .geri {
+
             display: block;
+
             width: fit-content;
+
             margin: 30px auto 10px auto;
+
             padding: 12px 25px;
-            background-color: #222;
-            color: white;
+
+            background-color: white;
+
+            color: black;
+
             text-decoration: none;
+
             border-radius: 10px;
+
             font-weight: bold;
+
         }
 
+
         .geri:hover {
-            background-color: #444;
+
+            background-color: #ddd;
+
+        }
+
+
+        /* TELEFON */
+
+        @media (max-width: 600px) {
+
+            .hafta {
+
+                width: 90%;
+
+                padding: 15px;
+
+            }
+
+            .takim {
+
+                font-size: 14px;
+
+            }
+
+            .skor {
+
+                width: 60px;
+
+                font-size: 16px;
+
+            }
+
+            .hafta-baslik {
+
+                font-size: 20px;
+
+            }
+
         }
 
     </style>
 
 </head>
 
+
 <body>
+
 
     <h1>
         ⚽ SÜPERLİGİN KALBİ
     </h1>
 
+
     {% for hafta in range(1, 35) %}
+
 
         <div class="hafta">
 
+
             <div class="hafta-baslik">
+
                 {{ hafta }}. Hafta
+
             </div>
+
 
             {% for mac in fiksturlar %}
 
+
                 {% if mac["hafta"] == hafta %}
+
 
                     <div class="mac">
 
+
                         <div class="takim ev">
+
                             {{ mac["ev_sahibi"] }}
+
                         </div>
 
+
                         <div class="skor">
+
 
                             {% if mac["skor"] %}
 
@@ -132,31 +269,47 @@
                             {% else %}
 
                                 <span class="oynanmadi">
+
                                     -
+
                                 </span>
 
                             {% endif %}
 
+
                         </div>
 
+
                         <div class="takim deplasman">
+
                             {{ mac["deplasman"] }}
+
                         </div>
+
 
                     </div>
 
+
                 {% endif %}
+
 
             {% endfor %}
 
+
         </div>
+
 
     {% endfor %}
 
+
     <a href="/" class="geri">
+
         🏠 ANA SAYFA
+
     </a>
+
 
 </body>
 
 </html>
+``
