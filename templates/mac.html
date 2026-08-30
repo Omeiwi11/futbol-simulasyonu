@@ -20,40 +20,25 @@
     <style>
 
         body {
-
             min-height: 100vh;
-
             box-sizing: border-box;
-
-            color: white;
-
+            color: white !important;
         }
-
 
         .tema-butonu {
-
             position: absolute;
-
             top: 20px;
-
             right: 20px;
-
             padding: 10px 15px;
-
             border: none;
-
             border-radius: 8px;
-
             cursor: pointer;
-
             z-index: 10;
-
         }
-
 
         .mac-alani {
 
-            min-height: 90vh;
+            min-height: 85vh;
 
             display: flex;
 
@@ -67,28 +52,23 @@
 
         }
 
-
         .mac-alani h1 {
 
             margin-bottom: 30px;
 
-            color: white;
-
-            font-size: 36px;
+            color: white !important;
 
         }
 
-
         .mac-alani p {
 
-            color: white;
+            color: white !important;
 
             font-weight: bold;
 
             font-size: 18px;
 
         }
-
 
         select {
 
@@ -104,7 +84,6 @@
 
         }
 
-
         .simule-butonu {
 
             margin-top: 20px;
@@ -119,18 +98,23 @@
 
             cursor: pointer;
 
-            color: black;
+            color: black !important;
 
         }
 
+        .mac-alani h2 {
 
-        .mac-alani h2,
+            color: white !important;
+
+        }
+
         .mac-alani h3 {
 
-            color: white;
+            color: white !important;
+
+            font-size: 22px;
 
         }
-
 
         .geri {
 
@@ -138,13 +122,13 @@
 
             width: fit-content;
 
-            margin: -40px auto 20px auto;
+            margin: -20px auto 20px auto;
 
             padding: 12px 25px;
 
             background-color: white;
 
-            color: black;
+            color: black !important;
 
             text-decoration: none;
 
@@ -154,30 +138,11 @@
 
         }
 
-
         .geri:hover {
 
             background-color: #ddd;
 
         }
-
-
-        body.acik-tema {
-
-            color: black;
-
-        }
-
-
-        body.acik-tema .mac-alani h1,
-        body.acik-tema .mac-alani p,
-        body.acik-tema .mac-alani h2,
-        body.acik-tema .mac-alani h3 {
-
-            color: black;
-
-        }
-
 
         @media (max-width: 600px) {
 
@@ -223,21 +188,15 @@
 
     <div class="mac-alani">
 
-
         <h1>
-
             ⚽ MAÇ SİMÜLASYONU
-
         </h1>
 
 
         <form method="POST">
 
-
             <p>
-
                 Ev Sahibi Takım
-
             </p>
 
 
@@ -257,9 +216,7 @@
 
 
             <p>
-
                 Deplasman Takımı
-
             </p>
 
 
@@ -290,26 +247,20 @@
 
             </button>
 
-
         </form>
 
 
         {% if sonuc %}
 
             <h2>
-
                 MAÇ SONUCU
-
             </h2>
 
             <h3>
-
                 {{ sonuc }}
-
             </h3>
 
         {% endif %}
-
 
     </div>
 

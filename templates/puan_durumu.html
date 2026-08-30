@@ -1,73 +1,280 @@
-```html
 <!DOCTYPE html>
 <html lang="tr">
 
 <head>
-    
 
     <meta charset="UTF-8">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Puan Durumu - Süper Ligin Kalbi</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
     <style>
 
+        /* ========================= */
+        /* GENEL */
+        /* ========================= */
 
+        body {
+
+            min-height: 100vh;
+
+            box-sizing: border-box;
+
+            color: white !important;
+
+        }
+
+
+        /* ========================= */
+        /* BAŞLIK */
+        /* ========================= */
 
         h1 {
+
             text-align: center;
+
             margin-bottom: 30px;
+
+            color: white !important;
+
+            text-shadow:
+                2px 2px 5px black;
+
         }
+
+
+        /* ========================= */
+        /* TABLO ALANI */
+        /* ========================= */
 
         .tablo {
+
+            width: 100%;
+
             max-width: 1000px;
-            margin: auto;
+
+            margin: 0 auto;
+
             overflow-x: auto;
+
         }
+
+
+        /* ========================= */
+        /* TABLO */
+        /* ========================= */
 
         table {
+
             width: 100%;
+
             border-collapse: collapse;
-            background-color: #1e1e1e;
+
+            background-color:
+                rgba(15, 15, 15, 0.95);
+
             border-radius: 10px;
+
             overflow: hidden;
+
+            color: white !important;
+
         }
+
+
+        /* ========================= */
+        /* TABLO BAŞLIKLARI */
+        /* ========================= */
 
         th {
+
             background-color: #333;
+
             padding: 14px 8px;
+
+            color: white !important;
+
+            font-weight: bold;
+
+            text-align: center;
+
         }
+
+
+        /* ========================= */
+        /* TABLO HÜCRELERİ */
+        /* ========================= */
 
         td {
+
             padding: 12px 8px;
+
             text-align: center;
-            border-bottom: 1px solid #444;
+
+            border-bottom:
+                1px solid #444;
+
+            color: white !important;
+
         }
+
+
+        /* ========================= */
+        /* TAKIM İSİMLERİ */
+        /* ========================= */
 
         td.takim {
+
             text-align: left;
+
             font-weight: bold;
+
+            color: white !important;
+
         }
+
+
+        /* Takım isminin içindeki yazı */
+
+        td.takim * {
+
+            color: white !important;
+
+        }
+
+
+        /* ========================= */
+        /* PUAN */
+        /* ========================= */
+
+        td.puan {
+
+            font-weight: bold;
+
+            font-size: 19px;
+
+            color: white !important;
+
+        }
+
+
+        /* ========================= */
+        /* SATIR */
+        /* ========================= */
+
+        tr {
+
+            color: white !important;
+
+        }
+
 
         tr:hover {
+
             background-color: #292929;
+
+            color: white !important;
+
         }
 
-        .puan {
-            font-weight: bold;
-            font-size: 18px;
+
+        tr:hover td {
+
+            color: white !important;
+
         }
+
+
+        /* ========================= */
+        /* ANA SAYFA BUTONU */
+        /* ========================= */
 
         .geri {
+
             display: block;
+
             width: fit-content;
-            margin: 30px auto 0 auto;
+
+            margin: 30px auto 20px auto;
+
             padding: 12px 25px;
+
             background-color: white;
-            color: black;
+
+            color: black !important;
+
             text-decoration: none;
+
             border-radius: 10px;
+
             font-weight: bold;
+
+        }
+
+
+        .geri:hover {
+
+            background-color: #ddd;
+
+            color: black !important;
+
+        }
+
+
+        /* ========================= */
+        /* TELEFON */
+        /* ========================= */
+
+        @media (max-width: 600px) {
+
+            .tablo {
+
+                width: 100%;
+
+                overflow-x: auto;
+
+            }
+
+
+            table {
+
+                min-width: 650px;
+
+                font-size: 13px;
+
+            }
+
+
+            th,
+            td {
+
+                padding: 9px 5px;
+
+            }
+
+
+            h1 {
+
+                font-size: 27px;
+
+            }
+
+
+            .geri {
+
+                margin-top: 25px;
+
+            }
+
         }
 
     </style>
@@ -77,26 +284,48 @@
 
 <body>
 
-    <h1>🏆 PUAN DURUMU</h1>
 
+    <!-- BAŞLIK -->
+
+    <h1>
+
+        🏆 PUAN DURUMU
+
+    </h1>
+
+
+    <!-- PUAN TABLOSU -->
 
     <div class="tablo">
 
+
         <table>
+
 
             <thead>
 
                 <tr>
+
                     <th>Sıra</th>
+
                     <th>Takım</th>
+
                     <th>O</th>
+
                     <th>G</th>
+
                     <th>B</th>
+
                     <th>M</th>
+
                     <th>AG</th>
+
                     <th>YG</th>
+
                     <th>AV</th>
+
                     <th>P</th>
+
                 </tr>
 
             </thead>
@@ -104,67 +333,108 @@
 
             <tbody>
 
+
                 {% for takim in siralama %}
+
 
                     <tr>
 
+
                         <td>
+
                             {{ loop.index }}
+
                         </td>
+
 
                         <td class="takim">
+
                             {{ takim }}
+
                         </td>
 
+
                         <td>
+
                             {{ puanlar[takim]["oynanan"] }}
+
                         </td>
 
+
                         <td>
+
                             {{ puanlar[takim]["galibiyet"] }}
+
                         </td>
 
+
                         <td>
+
                             {{ puanlar[takim]["beraberlik"] }}
+
                         </td>
 
+
                         <td>
+
                             {{ puanlar[takim]["maglubiyet"] }}
+
                         </td>
 
+
                         <td>
+
                             {{ puanlar[takim]["attigi"] }}
+
                         </td>
 
+
                         <td>
+
                             {{ puanlar[takim]["yedigi"] }}
+
                         </td>
 
+
                         <td>
+
                             {{ puanlar[takim]["averaj"] }}
+
                         </td>
+
 
                         <td class="puan">
+
                             {{ puanlar[takim]["puan"] }}
+
                         </td>
+
 
                     </tr>
 
+
                 {% endfor %}
+
 
             </tbody>
 
+
         </table>
+
 
     </div>
 
 
+    <!-- ANA SAYFA -->
+
     <a href="/" class="geri">
+
         🏠 ANA SAYFA
+
     </a>
 
 
 </body>
 
 </html>
-```
+``

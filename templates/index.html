@@ -12,47 +12,90 @@
 
     <title>Süper Ligin Kalbi</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
 
     <style>
 
         body {
             min-height: 100vh;
             box-sizing: border-box;
+            color: white !important;
         }
 
-        .tema-butonu {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            z-index: 10;
-        }
+
+        /* ANA İÇERİK */
 
         .ana-icerik {
+
             min-height: 90vh;
 
             display: flex;
+
             flex-direction: column;
 
             justify-content: center;
+
             align-items: center;
 
             text-align: center;
+
         }
 
+
+        /* ANA BAŞLIK */
+
         .ana-icerik h1 {
+
+            color: white !important;
+
+            text-align: center;
+
+            font-size: 40px;
+
             margin-bottom: 35px;
+
+            text-shadow:
+                2px 2px 5px black;
+
         }
+
+
+        /* TEMA BUTONU */
+
+        .tema-butonu {
+
+            position: absolute;
+
+            top: 20px;
+
+            right: 20px;
+
+            padding: 10px 15px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            z-index: 10;
+
+        }
+
+
+        /* MENÜ BUTONLARI */
 
         .menu-butonu,
         .fikstur-butonu,
         .puan-butonu {
+
             margin-top: 15px;
+
         }
+
 
         .menu-butonu button,
         .fikstur-butonu button,
@@ -67,6 +110,70 @@
             border-radius: 12px;
 
             cursor: pointer;
+
+            background-color: white !important;
+
+            color: black !important;
+
+            font-weight: bold;
+
+        }
+
+
+        .menu-butonu button:hover,
+        .fikstur-butonu button:hover,
+        .puan-butonu button:hover {
+
+            background-color: #dddddd !important;
+
+        }
+
+
+        /* AÇIK TEMA */
+
+        body.acik-tema {
+
+            color: black !important;
+
+        }
+
+
+        /*
+        ÖNEMLİ:
+        Açık temada bile ana başlık beyaz kalacak.
+        */
+
+        body.acik-tema .ana-icerik h1 {
+
+            color: white !important;
+
+            text-shadow:
+                2px 2px 5px black;
+
+        }
+
+
+        /* TELEFON */
+
+        @media (max-width: 600px) {
+
+            .ana-icerik h1 {
+
+                font-size: 30px;
+
+            }
+
+
+            .menu-butonu button,
+            .fikstur-butonu button,
+            .puan-butonu button {
+
+                font-size: 18px;
+
+                padding: 13px 25px;
+
+            }
+
         }
 
     </style>
@@ -76,52 +183,81 @@
 
 <body>
 
+
+    <!-- TEMA BUTONU -->
+
     <button
         class="tema-butonu"
         onclick="temaDegistir()"
     >
+
         🌙 Koyu / ☀️ Açık
+
     </button>
 
 
+    <!-- ANA MENÜ -->
+
     <div class="ana-icerik">
 
+
         <h1>
-            ⚽ Süper Ligin Kalbi
+
+            ⚽ SÜPER LİGİN KALBİ
+
         </h1>
 
+
+        <!-- MAÇ SİMÜLASYONU -->
 
         <div class="menu-butonu">
 
             <a href="/mac">
+
                 <button>
+
                     ⚽ MAÇI SİMÜLE ET
+
                 </button>
+
             </a>
 
         </div>
 
+
+        <!-- FİKSTÜR -->
 
         <div class="fikstur-butonu">
 
             <a href="/fikstur">
+
                 <button>
+
                     📅 FİKSTÜR
+
                 </button>
+
             </a>
 
         </div>
 
+
+        <!-- PUAN DURUMU -->
 
         <div class="puan-butonu">
 
             <a href="/puan-durumu">
+
                 <button>
+
                     🏆 PUAN DURUMU
+
                 </button>
+
             </a>
 
         </div>
+
 
     </div>
 
@@ -140,5 +276,3 @@
 </body>
 
 </html>
-``
-
