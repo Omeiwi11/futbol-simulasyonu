@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -6,16 +5,20 @@
 
     <meta charset="UTF-8">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Süper Ligin Kalbi</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
     <style>
 
-
-
-        body.acik-tema {
-            background-color: white;
-            color: black;
+        body {
+            min-height: 100vh;
+            box-sizing: border-box;
         }
 
         .tema-butonu {
@@ -26,28 +29,44 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
+            z-index: 10;
         }
 
-        .menu-butonu {
-            margin-top: 50px;
+        .ana-icerik {
+            min-height: 90vh;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+        }
+
+        .ana-icerik h1 {
+            margin-bottom: 35px;
+        }
+
+        .menu-butonu,
+        .fikstur-butonu,
+        .puan-butonu {
+            margin-top: 15px;
         }
 
         .menu-butonu button,
         .fikstur-butonu button,
         .puan-butonu button {
+
             font-size: 24px;
+
             padding: 15px 40px;
+
             border: none;
+
             border-radius: 12px;
+
             cursor: pointer;
-        }
-
-        .fikstur-butonu {
-            margin-top: 20px;
-        }
-
-        .puan-butonu {
-            margin-top: 20px;
         }
 
     </style>
@@ -57,37 +76,52 @@
 
 <body>
 
-    <button class="tema-butonu" onclick="temaDegistir()">
+    <button
+        class="tema-butonu"
+        onclick="temaDegistir()"
+    >
         🌙 Koyu / ☀️ Açık
     </button>
 
 
-    <h1>⚽ Süper Ligin Kalbi</h1>
+    <div class="ana-icerik">
+
+        <h1>
+            ⚽ Süper Ligin Kalbi
+        </h1>
 
 
-    <div class="menu-butonu">
+        <div class="menu-butonu">
 
-        <a href="/mac">
-            <button>⚽ MAÇI SİMÜLE ET</button>
-        </a>
+            <a href="/mac">
+                <button>
+                    ⚽ MAÇI SİMÜLE ET
+                </button>
+            </a>
 
-    </div>
-
-
-    <div class="fikstur-butonu">
-
-        <a href="/fikstur">
-            <button>📅 FİKSTÜR</button>
-        </a>
-
-    </div>
+        </div>
 
 
-    <div class="puan-butonu">
+        <div class="fikstur-butonu">
 
-        <a href="/puan-durumu">
-            <button>🏆 PUAN DURUMU</button>
-        </a>
+            <a href="/fikstur">
+                <button>
+                    📅 FİKSTÜR
+                </button>
+            </a>
+
+        </div>
+
+
+        <div class="puan-butonu">
+
+            <a href="/puan-durumu">
+                <button>
+                    🏆 PUAN DURUMU
+                </button>
+            </a>
+
+        </div>
 
     </div>
 
@@ -106,4 +140,5 @@
 </body>
 
 </html>
+``
 

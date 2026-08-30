@@ -5,52 +5,145 @@
 
     <meta charset="UTF-8">
 
-    <title>Maç Simülasyonu</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Puan Durumu - Süper Ligin Kalbi</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
     <style>
 
-
-
-        .tema-butonu {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
+        body {
+            min-height: 100vh;
+            box-sizing: border-box;
+            color: white;
         }
 
-        .mac-alani {
-            margin-top: 80px;
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
         }
 
-        select {
-            padding: 10px;
-            font-size: 16px;
-            margin: 10px;
+        .tablo {
+
+            max-width: 1000px;
+
+            margin: 0 auto;
+
+            overflow-x: auto;
+
         }
 
-        .simule-butonu {
-            margin-top: 20px;
-            padding: 15px 30px;
-            font-size: 20px;
-            border: none;
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background-color: #1e1e1e;
+
             border-radius: 10px;
-            cursor: pointer;
+
+            overflow: hidden;
+
+        }
+
+        th {
+
+            background-color: #333;
+
+            color: white;
+
+            padding: 14px 8px;
+
+        }
+
+        td {
+
+            padding: 12px 8px;
+
+            text-align: center;
+
+            border-bottom: 1px solid #444;
+
+            color: white;
+
+        }
+
+        td.takim {
+
+            text-align: left;
+
+            font-weight: bold;
+
+            color: white;
+
+        }
+
+        tr:hover {
+
+            background-color: #292929;
+
+        }
+
+        .puan {
+
+            font-weight: bold;
+
+            font-size: 18px;
+
+            color: white;
+
         }
 
         .geri {
+
             display: block;
+
             width: fit-content;
+
             margin: 30px auto 0 auto;
+
             padding: 12px 25px;
+
             background-color: white;
+
             color: black;
+
             text-decoration: none;
+
             border-radius: 10px;
+
             font-weight: bold;
+
+        }
+
+        .geri:hover {
+
+            background-color: #ddd;
+
+        }
+
+
+        /* AÇIK TEMA */
+
+        body.acik-tema {
+
+            color: black;
+
+        }
+
+        body.acik-tema h1 {
+
+            color: black;
+
         }
 
     </style>
@@ -60,78 +153,98 @@
 
 <body>
 
-    <button class="tema-butonu" onclick="temaDegistir()">
-        🌙 Koyu / ☀️ Açık
-    </button>
+
+    <h1>
+        🏆 PUAN DURUMU
+    </h1>
 
 
-    <div class="mac-alani">
+    <div class="tablo">
 
-        <h1>⚽ MAÇ SİMÜLASYONU</h1>
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Sıra</th>
+
+                    <th>Takım</th>
+
+                    <th>O</th>
+
+                    <th>G</th>
+
+                    <th>B</th>
+
+                    <th>M</th>
+
+                    <th>AG</th>
+
+                    <th>YG</th>
+
+                    <th>AV</th>
+
+                    <th>P</th>
+
+                </tr>
+
+            </thead>
 
 
-        <form method="POST">
+            <tbody>
 
-            <p>Ev Sahibi Takım</p>
+                {% for takim in siralama %}
 
-            <select name="takim1">
+                    <tr>
 
-                {% for takim in takimlar %}
+                        <td>
+                            {{ loop.index }}
+                        </td>
 
-                    <option value="{{ takim }}">
-                        {{ takim }}
-                    </option>
+                        <td class="takim">
+                            {{ takim }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["oynanan"] }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["galibiyet"] }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["beraberlik"] }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["maglubiyet"] }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["attigi"] }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["yedigi"] }}
+                        </td>
+
+                        <td>
+                            {{ puanlar[takim]["averaj"] }}
+                        </td>
+
+                        <td class="puan">
+                            {{ puanlar[takim]["puan"] }}
+                        </td>
+
+                    </tr>
 
                 {% endfor %}
 
-            </select>
+            </tbody>
 
-
-            <p>Deplasman Takımı</p>
-
-            <select name="takim2">
-
-                {% for takim in takimlar %}
-
-                    <option value="{{ takim }}">
-                        {{ takim }}
-                    </option>
-
-                {% endfor %}
-
-            </select>
-
-
-            <br>
-
-
-            <button class="simule-butonu" type="submit">
-                ⚽ MAÇI SİMÜLE ET
-            </button>
-
-        </form>
-
-
-        {% if sonuc %}
-
-            <h2>MAÇ SONUCU</h2>
-
-            <h3>{{ sonuc }}</h3>
-
-        {% endif %}
-
-    </div>
-
-
-    <script>
-
-        function temaDegistir() {
-
-            document.body.classList.toggle("acik-tema");
-
-        }
-
-    </script>
+        </table>
 
     </div>
 
@@ -139,7 +252,6 @@
     <a href="/" class="geri">
         🏠 ANA SAYFA
     </a>
-
 
 
 </body>
