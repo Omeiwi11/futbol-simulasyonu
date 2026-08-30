@@ -1,20 +1,15 @@
-
-
-/* GENEL SAYFA AYARLARI */
-
-
 body {
     font-family: Arial, sans-serif;
 
     background-image: url("/static/superlig-arka-plan.jpg");
     background-size: cover;
-    background-position: center -300px;
-    background-attachment: fixed;
+    background-position: center center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 
     margin: 0;
+    padding: 30px;
 }
-
 
 
 /* TELEFON */
@@ -25,8 +20,8 @@ body {
         background-image: url("/static/superlig-mobil.jpg");
         background-size: cover;
         background-position: center center;
-        background-attachment: scroll;
         background-repeat: no-repeat;
+        background-attachment: scroll;
     }
 
 }
