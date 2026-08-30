@@ -1,0 +1,31 @@
+
+
+/* GENEL SAYFA AYARLARI */
+
+
+body {
+    font-family: Arial, sans-serif;
+
+    background-image: url("/static/superlig-arka-plan.jpg");
+    background-size: cover;
+    background-position: center -300px;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    margin: 0;
+}
+
+
+
+/*          MOBİL AYARLARI        */
+
+@media (max-width: 600px) {
+
+    body {
+        background-size: auto 100vh;
+        background-position: center -300px;
+        background-attachment: scroll;
+        background-repeat: no-repeat;
+    }
+
+}
