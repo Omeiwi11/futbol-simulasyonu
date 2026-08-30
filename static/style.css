@@ -17,13 +17,14 @@ body {
 
 
 
-/*          MOBİL AYARLARI        */
+/* TELEFON */
 
 @media (max-width: 600px) {
 
     body {
-        background-size: auto 100vh;
-        background-position: center -300px;
+        background-image: url("/static/superlig-mobil.jpg");
+        background-size: cover;
+        background-position: center center;
         background-attachment: scroll;
         background-repeat: no-repeat;
     }
